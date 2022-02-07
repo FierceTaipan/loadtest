@@ -8,7 +8,7 @@ import io.gatling.core.feeder.BatchableFeederBuilder
 import io.gatling.core.structure.ChainBuilder
 import io.gatling.http.Predef._
 import models.CreateUserRequest
-import utils.{GsonUtils, tuneLogging}
+import utils.{EmailUtils, GsonUtils, tuneLogging}
 import com.github.phisgr.gatling.grpc.protocol.GrpcProtocol
 import com.github.phisgr.gatling.pb.{EpxrLens, value2ExprUpdatable}
 import io.grpc.health.v1.{HealthCheckRequest, HealthCheckResponse, HealthGrpc}
@@ -39,7 +39,7 @@ object ExampleMethods {
     .post("public/v1/users")
     .body(
       StringBody(GsonUtils.toJson(CreateUserRequest(
-        email = "testQA@ya.ru",
+        email = "${email}@gmail.com",
         name = "NewUser",
         gender = "${gender}",
         status = "active")
@@ -78,6 +78,7 @@ object ExampleMethods {
     group("FirstChain") {
       exec(getAllUsers)
         .feed(genderCsvFeeder)
+        .exec(_.set("email", EmailUtils.generate()))
         .exec(createUser)
     }
 
