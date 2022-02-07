@@ -1,0 +1,10 @@
+{
+  "simulation": "example.ExampleSimulation",
+  "simulationId": "examplesimulation",
+  "start": 1643707839938,
+  "description": "",
+  "scenarios": ["scenarioOne", "scenarioTwo"],
+  "assertions": [
+
+  ]
+}

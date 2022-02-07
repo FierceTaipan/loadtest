@@ -1,0 +1,18 @@
+RUN	example.ExampleSimulation	examplesimulation	1643711068860	 	3.6.1
+ERROR	getAllUsers: Failed to build request: No baseUrl defined but provided url is relative : public/v1/users 	1643711070282
+ERROR	posts: Failed to build request: No baseUrl defined but provided url is relative : public/v1/posts 	1643711070288
+ERROR	comments: Failed to build request: No baseUrl defined but provided url is relative : public/v1/comments 	1643711070289
+GROUP	ThirdChain	1643711070276	1643711070289	0	KO
+USER	scenarioThree	START	1643711070275
+USER	scenarioThree	END	1643711070293
+USER	scenarioOne	START	1643711070275
+USER	scenarioTwo	START	1643711070275
+REQUEST	FirstChain	getAllUsers	1643711070295	1643711071653	OK	 
+REQUEST	SecondChain	getAllUsers	1643711070295	1643711071672	OK	 
+REQUEST	SecondChain	posts	1643711071691	1643711072059	OK	 
+REQUEST	FirstChain	createUser	1643711071698	1643711072051	KO	status.find.in(200,201), but actually found 422
+GROUP	FirstChain	1643711070276	1643711072108	1711	KO
+USER	scenarioOne	END	1643711072108
+REQUEST	SecondChain	comments	1643711072061	1643711072409	OK	 
+GROUP	SecondChain	1643711070276	1643711072410	2093	OK
+USER	scenarioTwo	END	1643711072410
