@@ -14,6 +14,7 @@ import com.github.phisgr.gatling.pb.{EpxrLens, value2ExprUpdatable}
 import io.grpc.health.v1.{HealthCheckRequest, HealthCheckResponse, HealthGrpc}
 import io.grpc.Status
 import com.github.phisgr.gatling.grpc.Predef._
+import io.grpc.health.v1.HealthCheckResponse.ServingStatus.SERVING
 
 
 object ExampleMethods {
@@ -69,6 +70,7 @@ object ExampleMethods {
       .payload(HealthCheckRequest.defaultInstance.updateExpr(
         _.service :~ ""
       ))
+      .extract(_.status.some)(_ is SERVING)
       .check(statusCode is Status.Code.OK)
 
 
